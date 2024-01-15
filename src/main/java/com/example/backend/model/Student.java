@@ -10,13 +10,12 @@ public class Student {
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private long id;
-
 	@Column(name = "nim", unique = true, nullable = false)
 	private String nim;
-	@Column(name = "nama_depan", nullable = false)
-	private String nama_depan;
-	@Column(name = "nama_belakang")
-	private String nama_belakang;
+	@Column(name = "namaDepan", nullable = false)
+	private String namaDepan;
+	@Column(name = "namaBelakang")
+	private String namaBelakang;
 	@Column(name = "tanggal_lahir", nullable = false)
 	private Date tanggal_lahir;
 
@@ -26,13 +25,13 @@ public class Student {
 	public Student() {
 	}
 
-
-	public Student(String nim, String nama_depan, String nama_belakang, Date tanggal_lahir) {
+	public Student(String nim, String namaDepan, String namaBelakang, Date tanggal_lahir) {
 		this.nim = nim;
-		this.nama_depan = nama_depan;
-		this.nama_belakang = nama_belakang;
-		this.tanggal_lahir = tanggal_lahir;
+		this.namaDepan = namaDepan;
+		this.namaBelakang = namaBelakang;
+		setTanggal_lahir(tanggal_lahir);
 	}
+
 
 	//Getter and Setter
 
@@ -49,20 +48,20 @@ public class Student {
 		this.nim = nim;
 	}
 
-	public String getNama_depan() {
-		return nama_depan;
+	public String getNamaDepan() {
+		return namaDepan;
 	}
 
-	public void setNama_depan(String nama_depan) {
-		this.nama_depan = nama_depan;
+	public void setNamaDepan(String namaDepan) {
+		this.namaDepan = namaDepan;
 	}
 
-	public String getNama_belakang() {
-		return nama_belakang;
+	public String getNamaBelakang() {
+		return namaBelakang;
 	}
 
-	public void setNama_belakang(String nama_belakang) {
-		this.nama_belakang = nama_belakang;
+	public void setNamaBelakang(String namaBelakang) {
+		this.namaBelakang = namaBelakang;
 	}
 
 	public Date getTanggal_lahir() {
@@ -77,25 +76,14 @@ public class Student {
 		this.tanggal_lahir = tanggal_lahir;
 	}
 
-	// Method to determine age
-	private long findAge(Date birth) {
-		try {
-			Date current = new Date();
-			long diff = current.getTime() - birth.getTime();
-			long age = (diff / (1000L * 60 * 60 * 24 * 365));
-			return age;
-		}catch (Exception e){
-			System.out.println(e.getMessage());
-		}
-		return 0;
-	}
-
-
 	@Override
 	public String toString() {
-		return "Nomor Induk Mahasiswa = " + id +
-				",Nama Lengkap = " + nama_depan +" "+ nama_belakang +
-				",Usia = " + findAge(getTanggal_lahir());
+		return "Student{" +
+				"id=" + id +
+				", nim='" + nim + '\'' +
+				", namaDepan='" + namaDepan + '\'' +
+				", namaBelakang='" + namaBelakang + '\'' +
+				", tanggal_lahir=" + tanggal_lahir +
+				'}';
 	}
-
 }
